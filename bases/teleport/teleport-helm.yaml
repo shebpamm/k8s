@@ -6,6 +6,8 @@ publicAddr:
   - teleport.teleport.k8s.sorsa.cloud:443
 proxyListenerMode: multiplex
 acme: false
+podSecurityPolicy:
+  enabled: false
 highAvailability:
   certManager:
     enabled: true
@@ -14,3 +16,7 @@ highAvailability:
     addCommonName: true
 tls:
   existingCASecretName: sorsa-root-ca
+
+annotations:
+  deployment:
+    wave.pusher.com/update-on-config-change: "true"

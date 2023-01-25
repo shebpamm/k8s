@@ -2,13 +2,15 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 helmCharts:
   - name: teleport-cluster
+    releaseName: teleport
     version: 11.1.3
     namespace: teleport
     repo: https://charts.releases.teleport.dev
     valuesFile: teleport-helm.yaml
+    includeCRDs: true
 
-  - name: teleport-kube-agent
-    version: 11.1.4
-    namespace: teleport-agent
-    repo: https://charts.releases.teleport.dev
-    valuesFile: teleport-kubernetes-agent.yaml
+  # - name: teleport-kube-agent
+  #   version: 11.1.3
+  #   namespace: teleport-agent
+  #   repo: https://charts.releases.teleport.dev
+  #   valuesFile: teleport-kube-agent-helm.yaml
