@@ -1,0 +1,10 @@
+---
+roles: kube
+authToken: 17122fedcc9e1678ffead35535173f17
+proxyAddr: teleport.teleport.k8s.sorsa.cloud:443
+kubeClusterName: sorsalab
+teleportVersionOverride: 11.1.3
+labels:
+    teleport.internal/resource-id: a985ec25-63b8-46c4-9726-a6d1c3b2b7bf
+tls:
+    existingCASecretName: sorsa-root-ca

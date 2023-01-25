@@ -1,0 +1,16 @@
+---
+
+clusterName: teleport.teleport.k8s.sorsa.cloud
+chartMode: standalone
+publicAddr:
+  - teleport.teleport.k8s.sorsa.cloud:443
+proxyListenerMode: multiplex
+acme: false
+highAvailability:
+  certManager:
+    enabled: true
+    issuerName: vault-issuer
+    issuerKind: ClusterIssuer
+    addCommonName: true
+tls:
+  existingCASecretName: sorsa-root-ca
