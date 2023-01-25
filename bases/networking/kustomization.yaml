@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: metallb-system
+resources:
+  - github.com/metallb/metallb/config/native?ref=v0.13.7
+  - ./bgp-peers.yaml
+  - ./bgp.yaml
+  - ./metallb-config.yaml
+  - ./metal-pool.yaml
+  - ./dns-service.yaml
+helmCharts:
+  - name: cert-manager
+    version: v1.10.1
+    namespace: cert-manager
+    repo: https://charts.jetstack.io
