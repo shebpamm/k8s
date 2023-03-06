@@ -5,8 +5,8 @@ metadata:
   namespace: default
 spec:
   ports:
-  - protocol: TCP
-    port: 8200
+    - protocol: TCP
+      port: 8200
 ---
 apiVersion: v1
 kind: Endpoints
