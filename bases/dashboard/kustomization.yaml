@@ -1,0 +1,4 @@
+resources:
+  - ./dashboard.yaml
+patches:
+  - ./loadbalancer-patch.yaml

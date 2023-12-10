@@ -116,16 +116,16 @@ resource "vault_kubernetes_auth_backend_role" "sorsalab-kube-auth-role" {
 }
 
 # Expose the root ca for teleport, as trust-manager is still WIP
-resource "kubernetes_secret" "sorsa-root-ca" {
-  metadata {
-    name = "sorsa-root-ca"
-    namespace = "teleport"
-  }
-
-  data = {
-    "ca.pem" = vault_pki_secret_backend_root_cert.sorsalab-root.certificate
-  }
-}
+# resource "kubernetes_secret" "sorsa-root-ca" {
+#   metadata {
+#     name = "sorsa-root-ca"
+#     namespace = "teleport"
+#   }
+#
+#   data = {
+#     "ca.pem" = vault_pki_secret_backend_root_cert.sorsalab-root.certificate
+#   }
+# }
 
 output "root_ca" {
   value = vault_pki_secret_backend_root_cert.sorsalab-root.certificate
