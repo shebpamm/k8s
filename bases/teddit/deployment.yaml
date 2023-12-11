@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: teddit
+spec:
+  replicas: 1  # Adjust as needed
+  selector:
+    matchLabels:
+      app: teddit
+  template:
+    metadata:
+      labels:
+        app: teddit
+    spec:
+      containers:
+        - name: teddit
+          image: teddit/teddit:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DOMAIN
+              value: teddit.opcode.xyz
+            - name: USE_HELMET
+              value: "true"
+            - name: USE_HELMET_HSTS
+              value: "true"
+            - name: TRUST_PROXY
+              value: "true"
+            - name: REDIS_HOST
+              value: teddit-redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: teddit
+spec:
+  type: LoadBalancer
+  selector:
+    app: teddit
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

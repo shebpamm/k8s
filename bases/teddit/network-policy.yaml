@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: teddit-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: teddit
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: teddit-redis
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: teddit-redis-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: teddit-redis
+  ingress: []
