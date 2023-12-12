@@ -1,7 +1,0 @@
-apiVersion: projectcalico.org/v3
-kind: BGPPeer
-metadata:
-  name: pfsense
-spec:
-  peerIP: 192.168.7.1
-  asNumber: 64501
