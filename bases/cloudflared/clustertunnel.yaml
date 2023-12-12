@@ -1,0 +1,15 @@
+# clustertunnel.yaml
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: ClusterTunnel
+metadata:
+  name: operator-tunnel
+spec:
+  newTunnel:
+    name: operator
+  size: 2                       # This is the number of replicas for cloudflared
+  cloudflare:
+    email: shebpamm123@gmail.com
+    domain: opcode.xyz
+    secret: cloudflare-secrets  # The secret created before
+    # accountId and accountName cannot be both empty. If both are provided, Account ID is used if valid, else falls back to Account Name.
+    accountId: 7700a69459cc06619c8fd35a5dcbedc8
