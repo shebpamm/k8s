@@ -1,0 +1,10 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: startpage-cluster-tun
+subjects:
+  - name: startpage
+tunnelRef:
+  kind: ClusterTunnel
+  name: operator-tunnel

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: startpage
+spec:
+  replicas: 1  # Adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: startpage
+  template:
+    metadata:
+      labels:
+        app: startpage
+    spec:
+      containers:
+      - name: startpage
+        image: shebpamm/startpage:nginx
+        ports:
+        - containerPort: 80
