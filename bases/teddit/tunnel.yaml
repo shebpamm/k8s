@@ -1,0 +1,10 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: teddit-cluster-tun
+subjects:
+  - name: teddit
+tunnelRef:
+  kind: ClusterTunnel
+  name: operator-tunnel

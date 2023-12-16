@@ -5,5 +5,4 @@ resources:
   - namespace.yaml
   - redis.yaml
   - deployment.yaml
-  - cloudflared.yaml
-  # - network-policy.yaml
+  - tunnel.yaml
