@@ -1,0 +1,22 @@
+# patch_nfs_details.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nfs-client-provisioner
+  name: nfs-client-provisioner
+spec:
+  template:
+    spec:
+      containers:
+        - name: nfs-client-provisioner
+          env:
+            - name: NFS_SERVER
+              value: hc4nas.sorsa.cloud
+            - name: NFS_PATH
+              value: "/mnt/tank/kubernetes"
+      volumes:
+        - name: nfs-client-root
+          nfs:
+            server: hc4nas.sorsa.cloud
+            path: "/mnt/tank/kubernetes"

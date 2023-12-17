@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: crystal-db-lb
+spec:
+  type: LoadBalancer
+  selector:
+    cnpg.io/cluster: cluster-crystal
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432

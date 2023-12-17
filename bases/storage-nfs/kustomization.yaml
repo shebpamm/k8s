@@ -1,8 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
+namespace: nfs-provisioner
+resources:
+- namespace.yaml
+- github.com/kubernetes-sigs/nfs-subdir-external-provisioner//deploy
 kind: Kustomization
-helmCharts:
-  - name: nfs-subdir-external-provisioner
-    version: 4.0.2
-    namespace: nfs-provisioner
-    repo: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
-    valuesFile: sorsanas-nfs.yaml
+patches:
+- path: patch_nfs_details.yaml

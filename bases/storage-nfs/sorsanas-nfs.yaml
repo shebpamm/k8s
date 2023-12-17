@@ -1,8 +1,8 @@
 ---
 
 nfs:
-  server: sorsanas.sorsa.cloud
-  path: "/Kubernetes"
+  server: hc4nas.sorsa.cloud
+  path: "/mnt/tank/kubernetes"
   mountOptions:
     - nfsvers=3
     - hard
