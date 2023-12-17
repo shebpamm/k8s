@@ -3,6 +3,6 @@ kind: Kustomization
 namespace: crystal
 resources:
   - namespace.yaml
-  - db.yaml
-  - lb.yaml
+  - database.yaml
+  - loadbalancer.yaml
   - cloudflared.yaml

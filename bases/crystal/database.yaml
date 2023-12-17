@@ -1,0 +1,14 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: cluster-crystal
+spec:
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+  postgresql:
+    pg_hba:
+      - hostssl crystal all all cert
+  # Require 1Gi of space
+  storage:
+    storageClass: nfs-client
+    size: 100M
