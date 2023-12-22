@@ -1,23 +1,28 @@
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
 metadata:
-  name: teddit-network-policy
+  name: "l7-visibility"
 spec:
-  podSelector:
+  endpointSelector:
     matchLabels:
-      app: teddit
-  ingress:
-    - from:
-        - podSelector:
-            matchLabels:
-              app: teddit-redis
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: teddit-redis-network-policy
-spec:
-  podSelector:
-    matchLabels:
-      app: teddit-redis
-  ingress: []
+      "k8s:io.kubernetes.pod.namespace": teddit
+  egress:
+    - toPorts:
+        - ports:
+            - port: "53"
+              protocol: ANY
+            - port: "6379"
+              protocol: ANY
+            - port: "443"
+              protocol: TCP
+    - toEndpoints:
+        - matchLabels:
+            "k8s:io.kubernetes.pod.namespace": teddit
+      toPorts:
+        - ports:
+            - port: "80"
+              protocol: TCP
+            - port: "8080"
+              protocol: TCP
+            - port: "6379"
+              protocol: ANY

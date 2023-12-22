@@ -6,3 +6,4 @@ resources:
   - redis.yaml
   - deployment.yaml
   - tunnel.yaml
+  - network-policy.yaml
