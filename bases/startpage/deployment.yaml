@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: startpage
-        image: shebpamm/startpage:nginx
+        image: shebpamm/startpage:nginx@sha256:b647cc3f40c18cc2ca370e10b682058b2308c3c275b1fb08f27b4119047e60d4
         ports:
         - containerPort: 80
