@@ -5,6 +5,8 @@ metadata:
   labels:
     app: nfs-client-provisioner
   name: nfs-client-provisioner
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
 spec:
   template:
     spec:
