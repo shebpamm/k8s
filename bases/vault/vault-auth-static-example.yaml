@@ -1,0 +1,28 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: static-auth
+  namespace: app
+spec:
+  method: kubernetes
+  mount: kubernetes-vault-sync
+  kubernetes:
+    role: vault-operator
+    serviceAccount: default
+    audiences:
+      - vault
+---
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  name: vault-kv-app
+  namespace: app
+spec:
+  type: kv-v2
+  mount: kube
+  path: example
+  destination:
+    name: appsecret
+    create: true
+  refreshAfter: 30s
+  vaultAuthRef: static-auth

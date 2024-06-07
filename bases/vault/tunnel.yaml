@@ -1,0 +1,10 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: vault-cluster-tun
+subjects:
+  - name: vault
+tunnelRef:
+  kind: ClusterTunnel
+  name: operator-tunnel
