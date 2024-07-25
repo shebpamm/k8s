@@ -1,0 +1,14 @@
+---
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: cortex-cluster-tun
+subjects:
+  - name: cortex
+    kind: Service
+    spec:
+      fqdn: demo.cortexapp.dev
+      target: http://cortex.cortex.svc.cluster.local:3030
+tunnelRef:
+  kind: ClusterTunnel
+  name: cortex-tunnel

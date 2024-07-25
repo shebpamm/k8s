@@ -13,3 +13,19 @@ spec:
     secret: cloudflare-secrets  # The secret created before
     # accountId and accountName cannot be both empty. If both are provided, Account ID is used if valid, else falls back to Account Name.
     accountId: 7700a69459cc06619c8fd35a5dcbedc8
+---
+# clustertunnel.yaml
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: ClusterTunnel
+metadata:
+  name: cortex-tunnel
+spec:
+  newTunnel:
+    name: cortex-operator
+  size: 2                       # This is the number of replicas for cloudflared
+  cloudflare:
+    email: shebpamm123@gmail.com
+    domain: cortexapp.dev
+    secret: cloudflare-secrets  # The secret created before
+    # accountId and accountName cannot be both empty. If both are provided, Account ID is used if valid, else falls back to Account Name.
+    accountId: 7700a69459cc06619c8fd35a5dcbedc8

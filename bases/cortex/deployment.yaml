@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cortex
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cortex
+  template:
+    metadata:
+      labels:
+        app: cortex
+    spec:
+      containers:
+        - name: cortex
+          image: shebpamm/cortex:latest
+          imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            runAsNonRoot: false
+            seccompProfile:
+              type: RuntimeDefault
+          ports:
+            - containerPort: 3030
+          env:
+            - name: CORTEX_DEMO
+              value: "true"
+            - name: RUST_LOG
+              value: debug
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cortex
+spec:
+  selector:
+    app: cortex
+  ports:
+    - protocol: TCP
+      port: 3030
+      targetPort: 3030
