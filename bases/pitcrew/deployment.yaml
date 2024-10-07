@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pitcrew
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pitcrew
+  template:
+    metadata:
+      labels:
+        app: pitcrew
+    spec:
+      containers:
+        - name: pitcrew
+          image: shebpamm/pitcrew:latest
+          envFrom:
+            - secretRef:
+                name: pitcrew-secrets
