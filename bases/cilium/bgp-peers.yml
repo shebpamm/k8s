@@ -3,6 +3,10 @@ kind: CiliumBGPPeeringPolicy
 metadata:
   name: pfsense-bgp-peering-policy
 spec:
+  nodeSelector:
+    matchExpressions:
+      - key: node-role.kubernetes.io/control-plane
+        operator: DoesNotExist
   virtualRouters:
     - localASN: 64500
       exportPodCIDR: true
