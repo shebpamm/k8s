@@ -1,0 +1,29 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMAuth
+metadata:
+  name: sorsalab
+spec:
+  selectAllByDefault: true
+  userNamespaceSelector: {}
+  userSelector: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vmauth-lb
+  labels:
+    app.kubernetes.io/component: monitoring
+    app.kubernetes.io/instance: sorsalab
+    app.kubernetes.io/name: vmauth
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 8427
+      protocol: TCP
+      targetPort: 8427
+  selector:
+    app.kubernetes.io/component: monitoring
+    app.kubernetes.io/instance: sorsalab
+    app.kubernetes.io/name: vmauth
+    managed-by: vm-operator

@@ -1,0 +1,8 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMAgent
+metadata:
+  name: sorsalab
+spec:
+  selectAllByDefault: true
+  remoteWrite:
+    - url: "http://vminsert-sorsalab.victoriametrics.svc:8480/insert/0/prometheus/api/v1/write"
