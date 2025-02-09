@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: startpage
 spec:
-  replicas: 1  # Adjust the number of replicas as needed
+  replicas: 1
   selector:
     matchLabels:
       app: startpage
@@ -13,7 +13,7 @@ spec:
         app: startpage
     spec:
       containers:
-      - name: startpage
-        image: shebpamm/startpage:nginx@sha256:b647cc3f40c18cc2ca370e10b682058b2308c3c275b1fb08f27b4119047e60d4
-        ports:
-        - containerPort: 80
+        - name: startpage
+          image: shebpamm/startpage:3.0
+          ports:
+            - containerPort: 80
