@@ -1,0 +1,6 @@
+namespace: kube-system
+helmCharts:
+  - name: tetragon
+    includeCRDs: true
+    releaseName: tetragon
+    repo: https://helm.cilium.io
