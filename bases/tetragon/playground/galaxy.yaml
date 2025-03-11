@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: deathstar
+spec:
+  selector:
+    app: deathstar
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30080
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deathstar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deathstar
+  template:
+    metadata:
+      labels:
+        app: deathstar
+    spec:
+      containers:
+        - name: deathstar
+          image: quay.io/cilium/starwars:v2.1
+          ports:
+            - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tiefighter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tiefighter
+  template:
+    metadata:
+      labels:
+        app: tiefighter
+    spec:
+      containers:
+        - name: tiefighter
+          image: quay.io/cilium/json-mock:v1.3.8
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xwing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: xwing
+  template:
+    metadata:
+      labels:
+        app: xwing
+    spec:
+      containers:
+        - name: xwing
+          image: quay.io/cilium/json-mock:v1.3.8

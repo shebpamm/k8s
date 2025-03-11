@@ -1,0 +1,4 @@
+namespace: tetragon-playground
+resources:
+  - ./namespace.yaml
+  - ./galaxy.yaml
