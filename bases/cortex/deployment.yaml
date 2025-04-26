@@ -29,6 +29,8 @@ spec:
           env:
             - name: CORTEX_DEMO
               value: "true"
+            - name: CORTEX_PORT
+              value: "3030"
             - name: RUST_LOG
               value: debug
 ---
