@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudglare
+  namespace: cloudglare
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudglare
+  template:
+    metadata:
+      labels:
+        app: cloudglare
+    spec:
+      containers:
+        - name: cloudglare
+          image: shebpamm/cloudglare:latest
+          envFrom:
+            - secretRef:
+                name: cloudglare-secrets
