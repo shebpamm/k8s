@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: media-download
+  labels:
+    app: media-download
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: media-download
+  template:
+    metadata:
+      labels:
+        app: media-download
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:stable-alpine
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: media-nfs
+              mountPath: /usr/share/nginx/html
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              echo "server { listen 80; root /usr/share/nginx/html; autoindex on; }" > /etc/nginx/conf.d/default.conf && \
+              nginx -g "daemon off;"
+      volumes:
+        - name: media-nfs
+          nfs:
+            server: hc4nas.sorsa.cloud
+            path: /mnt/tank/media
+            readOnly: true

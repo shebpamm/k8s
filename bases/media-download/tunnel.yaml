@@ -1,0 +1,9 @@
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: TunnelBinding
+metadata:
+  name: media-tunnel
+subjects:
+  - name: media-download
+tunnelRef:
+  kind: ClusterTunnel
+  name: operator-tunnel
