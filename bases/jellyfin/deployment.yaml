@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: jellyfin
+  name: jellyfin
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: jellyfin
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+    spec:
+      volumes:
+        - name: jellyfin-config
+          persistentVolumeClaim:
+            claimName: jellyfin-config
+        - name: jellyfin-data
+          nfs:
+            server: hc4nas.sorsa.cloud
+            path: /mnt/tank/media/Jellyfin
+            readOnly: true
+      containers:
+        - env:
+            - name: JELLYFIN_PublishedServerUrl
+              value: 10.0.10.100
+            - name: PGID
+              value: "65541"
+            - name: PUID
+              value: "1044"
+            - name: TZ
+              value: Europe/Helsinki
+          securityContext:
+            privileged: true  # hardware acceleration
+          image: ghcr.io/linuxserver/jellyfin
+          imagePullPolicy: Always
+          name: jellyfin
+          ports:
+            - containerPort: 8096
+              name: http-tcp
+              protocol: TCP
+            - containerPort: 8920
+              name: https-tcp
+              protocol: TCP
+            - containerPort: 1900
+              name: dlna-udp
+              protocol: UDP
+            - containerPort: 7359
+              name: discovery-udp
+              protocol: UDP
+          stdin: true
+          tty: true
+          volumeMounts:
+            - mountPath: /config
+              name: jellyfin-config
+            - mountPath: /data
+              name: jellyfin-data
