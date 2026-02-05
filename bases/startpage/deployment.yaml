@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: startpage
-          image: shebpamm/startpage:3.0
+          image: shebpamm/startpage:4.0
           ports:
             - containerPort: 80
