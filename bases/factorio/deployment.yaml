@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: factorio
+  labels:
+    app: factorio
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: factorio
+  template:
+    metadata:
+      labels:
+        app: factorio
+    spec:
+      volumes:
+        - name: factorio-data
+          persistentVolumeClaim:
+            claimName: factorio-data
+      containers:
+        - name: factorio
+          image: factoriotools/factorio:2.1.24
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: game-udp
+              containerPort: 34197
+              protocol: UDP
+            - name: rcon-tcp
+              containerPort: 27015
+              protocol: TCP
+          env:
+            - name: GENERATE_NEW_SAVE
+              value: "false"
+            - name: SAVE_NAME
+              value: "BRATBRATBRAT.zip"
+          volumeMounts:
+            - name: factorio-data
+              mountPath: /factorio
